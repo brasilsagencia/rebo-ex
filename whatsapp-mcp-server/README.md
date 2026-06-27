@@ -25,6 +25,14 @@ npm run build
 
 O token de acesso **nunca** é exibido em logs, mensagens de erro ou nas respostas das ferramentas.
 
+Copie `.env.example` para `.env` e preencha com seus valores reais:
+
+```bash
+cp .env.example .env
+```
+
+> `.env` está no `.gitignore` — nunca commite seu token de acesso.
+
 ## Executando
 
 ```bash
