@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Brasil BI — Design Tokens
+   Paleta com identidade brasileira aplicada com equilíbrio (sem "bandeira").
+   ========================================================================== */
+
+:root {
+  /* --- Cores de marca (invariantes entre temas) --- */
+  --br-verde-neon: #00ff66;
+  --br-verde-profundo: #003d2d;
+  --br-amarelo: #ffd700;
+  --br-azul: #0066ff;
+  --br-azul-profundo: #071a3d;
+  --br-branco: #ffffff;
+  --br-cinza-claro: #f4f7fa;
+  --br-cinza-escuro: #1a1d24;
+  --br-preto-azulado: #060b14;
+
+  /* --- Tipografia --- */
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  --fs-3xs: 0.6875rem; /* 11px */
+  --fs-2xs: 0.75rem; /* 12px */
+  --fs-xs: 0.8125rem; /* 13px */
+  --fs-sm: 0.875rem; /* 14px */
+  --fs-md: 1rem; /* 16px */
+  --fs-lg: 1.125rem; /* 18px */
+  --fs-xl: 1.375rem; /* 22px */
+  --fs-2xl: 1.75rem; /* 28px */
+  --fs-3xl: 2.25rem; /* 36px */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* --- Espaçamento (escala 4px) --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+
+  /* --- Raios --- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-full: 999px;
+
+  /* --- Estrutura --- */
+  --sidebar-w: 254px;
+  --sidebar-w-collapsed: 66px;
+  --header-h: 62px;
+  --z-header: 40;
+  --z-sidebar: 50;
+  --z-panel: 60;
+  --z-modal: 80;
+  --z-toast: 90;
+
+  --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Tema escuro (padrão)
+   ========================================================================== */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-app: #060b14;
+  --bg-app-grad: radial-gradient(
+      1100px 620px at 12% -10%,
+      rgba(0, 102, 255, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 92% 4%,
+      rgba(0, 255, 102, 0.1),
+      transparent 62%
+    ),
+    linear-gradient(180deg, #060b14 0%, #05090f 100%);
+
+  --surface: rgba(7, 26, 61, 0.62);
+  --surface-solid: #0a1730;
+  --surface-2: rgba(10, 23, 48, 0.86);
+  --surface-3: rgba(255, 255, 255, 0.045);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  --text: #eaf1fb;
+  --text-2: #9fb2cd;
+  --text-3: #6b7f9c;
+  --text-inverse: #060b14;
+
+  --accent: #00ff66;
+  --accent-text: #35ff87; /* legível sobre fundo escuro */
+  --accent-on: #003d2d;
+  --info: #4d94ff;
+  --info-text: #7db2ff;
+  --warn: #ffd700;
+  --warn-text: #ffdf3d;
+  --danger: #ff5470;
+  --danger-text: #ff8098;
+
+  --grid-line: rgba(255, 255, 255, 0.075);
+  --axis-line: rgba(255, 255, 255, 0.22);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 28px 60px -22px rgba(0, 0, 0, 0.85);
+  --glow-accent: 0 0 0 1px rgba(0, 255, 102, 0.32),
+    0 0 22px -6px rgba(0, 255, 102, 0.4);
+  --glow-info: 0 0 0 1px rgba(0, 102, 255, 0.35),
+    0 0 22px -6px rgba(0, 102, 255, 0.45);
+
+  --blur: saturate(150%) blur(14px);
+
+  /* Série de cores para gráficos (luminâncias distintas p/ daltonismo) */
+  --s1: #00e05c;
+  --s2: #3d8bff;
+  --s3: #ffd700;
+  --s4: #ff7ac2;
+  --s5: #24d3d3;
+  --s6: #ff9145;
+  --s7: #a98bff;
+  --s8: #7ee787;
+  --s9: #ff5470;
+  --s10: #b6c2d4;
+}
+
+/* ==========================================================================
+   Tema claro
+   ========================================================================== */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-app: #f4f7fa;
+  --bg-app-grad: radial-gradient(
+      1000px 560px at 8% -12%,
+      rgba(0, 102, 255, 0.12),
+      transparent 58%
+    ),
+    radial-gradient(
+      820px 460px at 96% 0%,
+      rgba(0, 255, 102, 0.13),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+
+  --surface: rgba(255, 255, 255, 0.86);
+  --surface-solid: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: rgba(7, 26, 61, 0.04);
+  --surface-hover: rgba(7, 26, 61, 0.06);
+
+  --border: rgba(7, 26, 61, 0.12);
+  --border-strong: rgba(7, 26, 61, 0.26);
+
+  --text: #101828;
+  --text-2: #4a5a72;
+  --text-3: #6d7d93;
+  --text-inverse: #ffffff;
+
+  --accent: #00b64a;
+  --accent-text: #00733a; /* contraste AA sobre branco */
+  --accent-on: #ffffff;
+  --info: #0066ff;
+  --info-text: #0052cc;
+  --warn: #b58900;
+  --warn-text: #8a6800;
+  --danger: #d92b4b;
+  --danger-text: #b21f3c;
+
+  --grid-line: rgba(7, 26, 61, 0.09);
+  --axis-line: rgba(7, 26, 61, 0.3);
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow: 0 12px 28px -16px rgba(16, 24, 40, 0.32);
+  --shadow-lg: 0 26px 56px -26px rgba(16, 24, 40, 0.4);
+  --glow-accent: 0 0 0 1px rgba(0, 182, 74, 0.3), 0 8px 22px -12px rgba(0, 182, 74, 0.5);
+  --glow-info: 0 0 0 1px rgba(0, 102, 255, 0.28), 0 8px 22px -12px rgba(0, 102, 255, 0.5);
+
+  --blur: saturate(140%) blur(12px);
+
+  --s1: #00994a;
+  --s2: #0066ff;
+  --s3: #b58900;
+  --s4: #c2246e;
+  --s5: #0d8f8f;
+  --s6: #d1620a;
+  --s7: #6b46d6;
+  --s8: #2f7d32;
+  --s9: #d92b4b;
+  --s10: #5b6b80;
+}
+
+/* Preferência do sistema quando o usuário escolhe "Automático" */
+@media (prefers-color-scheme: light) {
+  [data-theme-pref="auto"] {
+    color-scheme: light;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

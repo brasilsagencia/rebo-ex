@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Brasil BI — Plataforma de Business Intelligence</title>
+    <meta
+      name="description"
+      content="Plataforma de Business Intelligence com importação de PDF, XLSX, CSV, JSON e XML, tratamento de dados, dashboards interativos, análises automáticas e exportação — tudo no navegador."
+    />
+    <meta name="theme-color" content="#060b14" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f7fa" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/charts.css" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23071A3D'/%3E%3Cpath d='M7 23V13l5-3 5 3' stroke='%2300FF66' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='19' y='9' width='3.5' height='14' rx='1.5' fill='%23FFD700'/%3E%3Crect x='24.5' y='14' width='3.5' height='9' rx='1.5' fill='%230066FF'/%3E%3C/svg%3E"
+    />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#view">Pular para o conteúdo</a>
+
+    <div class="app" id="app" data-sidebar="expanded">
+      <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+        <div class="brand">
+          <div class="brand__mark" aria-hidden="true">BI</div>
+          <div class="brand__text">
+            <div class="brand__name brand-gradient">Brasil BI</div>
+            <div class="brand__tag">Business Intelligence</div>
+          </div>
+        </div>
+        <nav class="nav" id="nav" aria-label="Seções"></nav>
+        <div class="sidebar__foot">
+          <button class="nav__item" id="nav-collapse" data-tip="Recolher menu" data-tip-pos="right" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+            <span>Recolher menu</span>
+          </button>
+        </div>
+      </aside>
+
+      <div class="main">
+        <header class="header" id="header" aria-label="Barra superior"></header>
+        <main class="view" id="view" tabindex="-1"></main>
+      </div>
+    </div>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+    <noscript>
+      <div style="padding: 32px; font-family: system-ui">
+        <h1>Brasil BI</h1>
+        <p>
+          Esta aplicação precisa de JavaScript para ler arquivos, calcular indicadores e desenhar os
+          gráficos no seu navegador. Ative o JavaScript para continuar.
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="js/app.js"></script>
+    <script type="module">
+      // Botão de recolher da barra lateral (independente do ciclo de render).
+      document.getElementById("nav-collapse")?.addEventListener("click", async () => {
+        const app = document.getElementById("app");
+        const collapsed = app.getAttribute("data-sidebar") === "collapsed";
+        app.setAttribute("data-sidebar", collapsed ? "expanded" : "collapsed");
+        const { update } = await import("./js/core/store.js");
+        update((s) => {
+          s.prefs.sidebar = collapsed ? "expanded" : "collapsed";
+        });
+      });
+    </script>
+  </body>
+</html>
