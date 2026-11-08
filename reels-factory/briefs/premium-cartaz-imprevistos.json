@@ -4,25 +4,80 @@
   "destino": "Meta Ads — Reels/Stories 9:16",
   "props": {
     "marca": "premium",
-    "gancho": {"segundos": 3, "linha1": "Imprevistos", "linha2": "não avisam.", "slogan": "A PROTEÇÃO QUE SEU VEÍCULO PRECISA!"},
+    "gancho": {
+      "segundos": 3,
+      "linha1": "Imprevistos",
+      "linha2": "não avisam.",
+      "slogan": "A PROTEÇÃO QUE SEU VEÍCULO PRECISA!"
+    },
     "riscos": {
       "segundos": 3.5,
       "kicker": "Num piscar de olhos, pode acontecer:",
       "itens": [
-        {"icone": "batida", "texto": "Batida"},
-        {"icone": "roubo", "texto": "Roubo"},
-        {"icone": "pane", "texto": "Pane na estrada"}
+        {
+          "icone": "batida",
+          "texto": "Batida"
+        },
+        {
+          "icone": "roubo",
+          "texto": "Roubo"
+        },
+        {
+          "icone": "pane",
+          "texto": "Pane na estrada"
+        }
       ]
     },
-    "promessa": {"segundos": 3.5, "destaque": "Proteja hoje", "texto": "o patrimônio que você levou anos para conquistar."},
+    "promessa": {
+      "segundos": 3.5,
+      "destaque": "Proteja hoje",
+      "texto": "o patrimônio que você levou anos para conquistar."
+    },
     "fechamento": {
-      "segundos": 5,
+      "segundos": 6,
       "chamada": "A proteção que seu veículo precisa!",
       "cta": "Faça sua cotação",
       "contatos": [
-        {"nome": "Altair Ribeiro", "whatsapp": "22 99611-1300"},
-        {"nome": "Mônica Ribeiro", "whatsapp": "21 99850-0066"}
+        {
+          "nome": "Altair Ribeiro",
+          "whatsapp": "22 99611-1300"
+        },
+        {
+          "nome": "Mônica Ribeiro",
+          "whatsapp": "21 99850-0066"
+        }
+      ]
+    },
+    "audio": {
+      "trilha": "marcas/premium/audio/trilha-cartaz.mp3",
+      "volumeTrilha": 0.85,
+      "volumeTrilhaSobVoz": 0.25,
+      "voz": "marcas/premium/audio/voz-cartaz.mp3",
+      "velocidadeVoz": 1.1,
+      "volumeVoz": 1,
+      "trechos": [
+        {
+          "de": 0,
+          "ate": 1.62,
+          "em": 0.35
+        },
+        {
+          "de": 1.95,
+          "ate": 4.9,
+          "em": 3.1
+        },
+        {
+          "de": 5.3,
+          "ate": 9.9,
+          "em": 6.55
+        },
+        {
+          "de": 9.93,
+          "ate": 15.8,
+          "em": 10.55
+        }
       ]
     }
-  }
+  },
+  "locucao": "Voz feminina ElevenLabs v4 (Higgsfield, voz 'Ines'). Texto: Imprevistos não avisam. Batida, roubo, pane na estrada... acontece num piscar de olhos. Proteja hoje o patrimônio que você levou anos para conquistar. Premium Proteção Veicular. Faça sua cotação agora pelo WhatsApp!"
 }

@@ -34,3 +34,9 @@ No template `apresentador`, grave o vídeo da pessoa falando o roteiro de `falas
 - Não inventar números, coberturas ou depoimentos: os riscos ("batida, roubo, pane") são situações, não promessa de cobertura. Confirme com o cliente antes de citar coberturas específicas.
 - Os vídeos saem sem trilha. Adicione música licenciada (ou a da biblioteca do Meta) ao publicar.
 - Remotion é gratuito para indivíduos e empresas pequenas; confira https://www.remotion.dev/docs/license antes de uso comercial em escala.
+
+## Trilha e locução
+
+Cada brief pode ter um bloco `audio`: `trilha` (MP3 em `public/`), `voz` (locução) e `trechos` — cada trecho corta `[de, ate]` da voz e toca no segundo `em`, para casar cada frase com a cena. A trilha abaixa sozinha enquanto a voz fala (ducking) e o render normaliza o volume para -14 LUFS (padrão de Reels).
+
+Exemplo Premium: trilhas ElevenLabs Music v2.5 e voz feminina ElevenLabs v4, geradas via Higgsfield, em `public/marcas/premium/audio/`.

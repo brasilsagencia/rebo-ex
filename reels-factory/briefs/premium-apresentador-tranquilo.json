@@ -6,26 +6,96 @@
   "props": {
     "marca": "premium",
     "segundos": 15,
-    "midia": {"imagem": "marcas/premium/apresentadora.jpg"},
+    "midia": {
+      "imagem": "marcas/premium/apresentadora.jpg"
+    },
     "bolhas": [
-      {"icone": "batida", "texto": "Batida", "em": 2.6, "ate": 9.6, "x": 170, "y": 380},
-      {"icone": "roubo", "texto": "Roubo", "em": 3.3, "ate": 9.6, "x": 910, "y": 560},
-      {"icone": "pane", "texto": "Pane", "em": 4.0, "ate": 9.6, "x": 150, "y": 860}
+      {
+        "icone": "batida",
+        "texto": "Batida",
+        "em": 2.6,
+        "ate": 9.6,
+        "x": 170,
+        "y": 380
+      },
+      {
+        "icone": "roubo",
+        "texto": "Roubo",
+        "em": 3.3,
+        "ate": 9.6,
+        "x": 910,
+        "y": 560
+      },
+      {
+        "icone": "pane",
+        "texto": "Pane",
+        "em": 4.0,
+        "ate": 9.6,
+        "x": 150,
+        "y": 860
+      }
     ],
     "falas": [
-      {"de": 0, "ate": 2.5, "texto": "Imprevisto não marca hora.", "destaque": ["imprevisto"]},
-      {"de": 2.5, "ate": 5.5, "texto": "Batida, roubo, pane na estrada...", "destaque": []},
-      {"de": 5.5, "ate": 8.5, "texto": "Você levou anos para conquistar seu carro.", "destaque": []},
-      {"de": 8.5, "ate": 10.5, "texto": "Proteja hoje!", "destaque": ["proteja", "hoje"]}
+      {
+        "de": 0.2,
+        "ate": 2.3,
+        "texto": "Imprevisto não marca hora.",
+        "destaque": [
+          "imprevisto"
+        ]
+      },
+      {
+        "de": 2.3,
+        "ate": 5.6,
+        "texto": "Batida, roubo, pane na estrada...",
+        "destaque": []
+      },
+      {
+        "de": 5.6,
+        "ate": 8.5,
+        "texto": "Você levou anos para conquistar seu carro.",
+        "destaque": []
+      },
+      {
+        "de": 8.5,
+        "ate": 9.8,
+        "texto": "Proteja hoje!",
+        "destaque": [
+          "proteja",
+          "hoje"
+        ]
+      }
     ],
     "cta": {
-      "em": 10.5,
+      "em": 9.8,
       "chamada": "A proteção que seu veículo precisa!",
       "texto": "Faça sua cotação",
       "contatos": [
-        {"nome": "Altair Ribeiro", "whatsapp": "22 99611-1300"},
-        {"nome": "Mônica Ribeiro", "whatsapp": "21 99850-0066"}
+        {
+          "nome": "Altair Ribeiro",
+          "whatsapp": "22 99611-1300"
+        },
+        {
+          "nome": "Mônica Ribeiro",
+          "whatsapp": "21 99850-0066"
+        }
+      ]
+    },
+    "audio": {
+      "trilha": "marcas/premium/audio/trilha-apresentador.mp3",
+      "volumeTrilha": 0.8,
+      "volumeTrilhaSobVoz": 0.22,
+      "voz": "marcas/premium/audio/voz-apresentador.mp3",
+      "velocidadeVoz": 1,
+      "volumeVoz": 1,
+      "trechos": [
+        {
+          "de": 0,
+          "ate": 13.0,
+          "em": 0.2
+        }
       ]
     }
-  }
+  },
+  "locucao": "Voz feminina ElevenLabs v4 (Higgsfield, voz 'Ines'). Prévia: no anúncio final, a apresentadora grava a própria fala."
 }

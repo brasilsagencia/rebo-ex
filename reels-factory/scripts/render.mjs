@@ -5,7 +5,8 @@
 // Usa a API do Remotion (sem chamar "npx"), então funciona igual em Windows, macOS e Linux.
 import {bundle} from '@remotion/bundler';
 import {renderMedia, selectComposition} from '@remotion/renderer';
-import {existsSync, mkdirSync, readdirSync, readFileSync} from 'node:fs';
+import {existsSync, mkdirSync, readdirSync, readFileSync, renameSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -49,5 +50,12 @@ for (const arq of briefs) {
       if (p !== ultimo) { ultimo = p; process.stdout.write(`${p * 10}% `); }
     },
   });
+  // Volume padrão de redes sociais (-14 LUFS). Usa o ffmpeg do sistema se existir; sem ele, mantém o original.
+  if (brief.props.audio) {
+    const tmp = saida.replace(/\.mp4$/, '.norm.mp4');
+    const r = spawnSync('ffmpeg', ['-v', 'error', '-y', '-i', saida, '-c:v', 'copy', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', tmp], {stdio: 'inherit'});
+    if (r.status === 0) renameSync(tmp, saida);
+    else console.log('(ffmpeg não encontrado: áudio sem normalização)');
+  }
   console.log(`\n✔ ${saida}`);
 }

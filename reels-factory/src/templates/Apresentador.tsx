@@ -9,6 +9,7 @@ import {Acabamento, FotoKenBurns} from '../components/Cenario';
 import {ICONES} from '../components/Icones';
 import {BotaoCTA, Contatos, Logo, type Contato} from '../components/Marca';
 import {clamp, Pop, Sobe, useSpring} from '../components/motion';
+import {MixAudio, type AudioProps} from '../components/Audio';
 
 export const FPS = 30;
 
@@ -21,6 +22,7 @@ export type ApresentadorProps = {
   bolhas: Bolha[];
   falas: Fala[];
   cta: {em: number; chamada: string; texto: string; contatos: Contato[]};
+  audio?: AudioProps;
 };
 
 export const duracaoApresentador = (p: ApresentadorProps) => Math.round(p.segundos * FPS);
@@ -213,6 +215,7 @@ export const Apresentador: React.FC<ApresentadorProps> = (p) => {
         <CartaoCTA m={m} c={p.cta} />
       </Sequence>
       <Acabamento />
+      <MixAudio a={p.audio} />
     </AbsoluteFill>
   );
 };

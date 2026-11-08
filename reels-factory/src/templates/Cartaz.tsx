@@ -8,6 +8,7 @@ import {ICONES} from '../components/Icones';
 import {BotaoCTA, Contatos, Logo, type Contato} from '../components/Marca';
 import {clamp, PalavraAPalavra, Pop, Slam, Sobe, useShake, Wipe} from '../components/motion';
 import {Transicoes} from '../components/Transicao';
+import {MixAudio, type AudioProps} from '../components/Audio';
 
 export const FPS = 30;
 
@@ -17,6 +18,7 @@ export type CartazProps = {
   riscos: {segundos: number; kicker: string; itens: {icone: string; texto: string}[]};
   promessa: {segundos: number; destaque: string; texto: string};
   fechamento: {segundos: number; chamada: string; cta: string; contatos: Contato[]};
+  audio?: AudioProps;
 };
 
 const f = (s: number) => Math.round(s * FPS);
@@ -189,6 +191,7 @@ export const Cartaz: React.FC<CartazProps> = (p) => {
         </Series.Sequence>
       </Series>
       <Transicoes marca={m} cortes={cortes} />
+      <MixAudio a={p.audio} />
     </AbsoluteFill>
   );
 };
