@@ -15,7 +15,7 @@ Exemplos prontos (proteção veicular, Premium): `exemplos/premium-cartaz-imprev
 npm install
 npm run studio                                   # pré-visualizar e ajustar
 npm run render                                   # renderiza todos os briefs → out/
-node scripts/render.mjs briefs/meu-pedido.json   # só um pedido
+npm run render -- briefs/meu-pedido.json         # só um pedido
 ```
 
 ## Fazer um novo pedido
@@ -23,7 +23,7 @@ node scripts/render.mjs briefs/meu-pedido.json   # só um pedido
 1. Copie um brief de `briefs/` com o template desejado (`"template": "cartaz"` ou `"apresentador"`).
 2. Troque textos, contatos, tempos (`segundos`) e ícones (`batida`, `roubo`, `pane`, `escudo`, `telefone`, `mensagem`).
 3. Cliente novo: adicione um kit em `src/brands/index.ts` e os arquivos em `public/marcas/<id>/` (logo real do cliente, nunca redesenhado).
-4. `node scripts/render.mjs briefs/<pedido>.json`.
+4. `npm run render -- briefs/<pedido>.json`. O MP4 sai em `out/` (H.264 yuv420p + AAC, pronto para Meta Ads/Instagram/WhatsApp).
 
 No template `apresentador`, grave o vídeo da pessoa falando o roteiro de `falas` e informe `"midia": {"video": "marcas/<id>/arquivo.mp4"}`; a foto é só prévia.
 
