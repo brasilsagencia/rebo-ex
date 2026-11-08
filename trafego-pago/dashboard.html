@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de Tráfego Pago</title>
+<link rel="icon" href="../assets/brasils-logo.png">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f5f6fa;
+  --surface-1: #fcfcfb;
+  --border: #e3e4ea;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7a7974;
+  --brand: #0A1F44;
+  --accent: #F26522;
+  --series-1: #2a78d6;
+  --grid: #ececea;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --chip-bg: #eef0f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111110;
+    --surface-1: #1a1a19;
+    --border: #2d2d2b;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #9a998f;
+    --brand: #f0efec;
+    --series-1: #3987e5;
+    --grid: #2a2a28;
+    --chip-bg: #262624;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110;
+  --surface-1: #1a1a19;
+  --border: #2d2d2b;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #9a998f;
+  --brand: #f0efec;
+  --series-1: #3987e5;
+  --grid: #2a2a28;
+  --chip-bg: #262624;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text-primary); font: 15px/1.5 "Poppins", "Inter", system-ui, Arial, sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+h1 { font-size: 1.45rem; margin: 0; color: var(--brand); }
+h1 small { display: block; font-size: .85rem; font-weight: 400; color: var(--text-secondary); }
+h2 { font-size: 1.05rem; margin: 0 0 12px; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; align-items: end; }
+label { display: grid; gap: 4px; font-size: .8rem; color: var(--text-secondary); }
+input[type=number], input[type=file] { font: inherit; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-primary); width: 100%; }
+button { font: inherit; cursor: pointer; border: 0; border-radius: 8px; padding: 9px 14px; background: var(--accent); color: #fff; font-weight: 600; }
+button.sec { background: var(--chip-bg); color: var(--text-primary); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+.kpi .lbl { font-size: .78rem; color: var(--text-secondary); }
+.kpi .val { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: .75rem; color: var(--text-muted); }
+.grid2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th { color: var(--text-secondary); font-weight: 600; font-size: .75rem; }
+td.nome { white-space: normal; min-width: 180px; }
+.badge { display: inline-flex; gap: 4px; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; background: var(--chip-bg); color: var(--text-primary); }
+.badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.b-escalar::before { background: var(--good); }
+.b-manter::before { background: var(--series-1); }
+.b-aprendendo::before { background: var(--warning); }
+.b-desligar::before { background: var(--critical); }
+.diag { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-height: 620px; overflow-y: auto; }
+.diag li { border-left: 4px solid var(--border); padding: 6px 10px; background: var(--bg); border-radius: 0 8px 8px 0; }
+.diag li.ok { border-color: var(--good); }
+.diag li.atencao { border-color: var(--warning); }
+.diag li.critico { border-color: var(--critical); }
+.diag b { font-size: .8rem; }
+.diag .acao { font-size: .8rem; color: var(--text-secondary); }
+.alerta { background: var(--chip-bg); border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: .85rem; }
+/* gráfico de barras */
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: minmax(90px, 160px) 1fr 74px; gap: 8px; align-items: center; font-size: .8rem; position: relative; }
+.bar-row .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-secondary); }
+.bar-track { position: relative; height: 22px; border-left: 1px solid var(--grid); }
+.bar { position: absolute; left: 0; top: 3px; height: 16px; border-radius: 0 4px 4px 0; background: var(--series-1); }
+.bar.ghost { background: transparent; border: 1.5px dashed var(--text-muted); border-left: 0; top: 2px; height: 18px; }
+.bar-row .v { text-align: right; font-variant-numeric: tabular-nums; }
+.bar-row:hover .lbl { color: var(--text-primary); }
+.tip { position: fixed; pointer-events: none; background: var(--text-primary); color: var(--surface-1); padding: 6px 9px; border-radius: 6px; font-size: .75rem; opacity: 0; transition: opacity .1s; z-index: 10; max-width: 260px; }
+.legend { display: flex; gap: 14px; font-size: .75rem; color: var(--text-secondary); margin-bottom: 10px; flex-wrap: wrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 14px; height: 10px; border-radius: 2px; background: var(--series-1); }
+.sw.ghost { background: transparent; border: 1.5px dashed var(--text-muted); }
+.vazio { color: var(--text-muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Painel de Tráfego Pago<small>Brasils Agência Digital · o que está certo, o que está errado e para onde vai o dinheiro</small></h1>
+    <div style="display:flex;gap:8px">
+      <button class="sec" id="tema" type="button" aria-label="Alternar tema">◐ Tema</button>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>1. Dados e metas</h2>
+    <div class="controls">
+      <label>Orçamento diário total (R$)<input id="orc" type="number" min="1" step="1" value="10"></label>
+      <label>CPA alvo — quanto pago por resultado (R$)<input id="cpa" type="number" min="1" step="0.5" value="15"></label>
+      <label>ROAS mínimo (0 = não vendo online)<input id="roas" type="number" min="0" step="0.1" value="0"></label>
+      <label>Mínimo por conjunto (R$/dia)<input id="min" type="number" min="1" step="0.5" value="5"></label>
+      <label>CSV exportado do Gerenciador de Anúncios<input id="arq" type="file" accept=".csv,.txt,.json"></label>
+      <button class="sec" id="exemplo" type="button">Carregar exemplo</button>
+    </div>
+    <p class="vazio" style="margin:10px 0 0">No Gerenciador de Anúncios: aba <b>Conjuntos de anúncios</b> → Relatórios → Exportar dados da tabela (.csv). O painel reconhece as colunas em português. Nada sai do seu navegador.</p>
+  </section>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>2. Decisão de orçamento (por dia)</h2>
+      <div class="legend"><span><i class="sw"></i>Novo orçamento</span><span><i class="sw ghost"></i>Orçamento atual</span></div>
+      <div class="bars" id="bars"><p class="vazio">Carregue um CSV ou o exemplo.</p></div>
+      <div id="alertas"></div>
+    </section>
+    <section class="card">
+      <h2>3. Diagnóstico — o que corrigir</h2>
+      <ul class="diag" id="diag"><li class="vazio">—</li></ul>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>4. Tabela completa</h2>
+    <div class="tbl-wrap"><table id="tbl"><thead><tr>
+      <th>Conjunto</th><th>Decisão</th><th>Nota</th><th>Gasto</th><th>Result.</th><th>CPA</th><th>CTR</th><th>CPC</th><th>CPM</th><th>Freq.</th><th>ROAS</th><th>Orç. atual</th><th>Orç. novo</th>
+    </tr></thead><tbody><tr><td colspan="13" class="vazio">—</td></tr></tbody></table></div>
+  </section>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="lib/regras.js"></script>
+<script>
+(function () {
+  var EXEMPLO = 'nome,campanha,status,gasto,impressoes,alcance,cliques,resultados,receita,orcamentoDiario,dias\n' +
+    'CJ01 - Mulheres 25-45 Vila Isabel - Reels depoimento,Mensagens WhatsApp,ativo,42.30,5120,2980,96,6,0,5,7\n' +
+    'CJ02 - Aberto 5km - Carrossel antes/depois,Mensagens WhatsApp,ativo,38.90,6400,4100,41,1,0,5,7\n' +
+    'CJ03 - Interesse empreendedor - Post oferta,Mensagens WhatsApp,ativo,9.80,1300,1100,12,0,0,4,2\n' +
+    'CJ04 - Lookalike clientes - Reels bastidor,Mensagens WhatsApp,ativo,35.00,7300,2200,30,0,0,5,7';
+  var linhas = [];
+  var $ = function (id) { return document.getElementById(id); };
+  var brl = function (v) { return v === null || v === undefined ? '—' : 'R$ ' + v.toFixed(2).replace('.', ','); };
+  var pct = function (v) { return v === null || v === undefined ? '—' : v.toFixed(2).replace('.', ',') + '%'; };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var ROT = { escalar: 'Escalar', manter: 'Manter', aprendendo: 'Aprendendo', desligar: 'Desligar' };
+
+  function guardar() { try { localStorage.setItem('trafego-cfg', JSON.stringify({ orc: $('orc').value, cpa: $('cpa').value, roas: $('roas').value, min: $('min').value })); } catch (e) {} }
+  function restaurar() { try { var c = JSON.parse(localStorage.getItem('trafego-cfg') || 'null'); if (c) { $('orc').value = c.orc; $('cpa').value = c.cpa; $('roas').value = c.roas; $('min').value = c.min; } } catch (e) {} }
+
+  function render() {
+    if (!linhas.length) return;
+    var r = RegrasTrafego.analisar(linhas, {
+      orcamentoDiarioTotal: $('orc').value, cpaAlvo: $('cpa').value, roasMinimo: $('roas').value, minimoPorConjunto: $('min').value
+    });
+    var t = r.totais;
+    var nDes = r.itens.filter(function (i) { return i.decisao.acao === 'desligar'; }).length;
+    var nEsc = r.itens.filter(function (i) { return i.decisao.acao === 'escalar'; }).length;
+    var cpaOk = t.cpa !== null && t.cpa <= r.config.cpaAlvo;
+    $('kpis').innerHTML = [
+      ['Investido no período', brl(t.gasto), r.itens.length + ' conjuntos'],
+      ['Resultados', String(t.resultados), 'mensagens / leads / vendas'],
+      ['Custo por resultado', brl(t.cpa), t.cpa === null ? 'sem resultados' : (cpaOk ? '✓ dentro do alvo ' : '✕ acima do alvo ') + brl(r.config.cpaAlvo)],
+      ['CTR de link', pct(t.ctr), 'CPC ' + brl(t.cpc) + ' · CPM ' + brl(t.cpm)],
+      ['Decisões', nEsc + ' escalar · ' + nDes + ' desligar', 'orçamento ' + brl(r.config.orcamentoDiarioTotal) + '/dia']
+    ].concat(r.config.roasMinimo > 0 ? [['ROAS', t.roas === null ? '—' : t.roas.toFixed(2) + 'x', 'mínimo ' + r.config.roasMinimo + 'x']] : [])
+     .map(function (k) { return '<div class="kpi"><div class="lbl">' + k[0] + '</div><div class="val">' + k[1] + '</div><div class="sub">' + k[2] + '</div></div>'; }).join('');
+
+    var ordem = r.itens.slice().sort(function (a, b) { return b.pontuacao - a.pontuacao; });
+    var max = Math.max.apply(null, ordem.map(function (i) { return Math.max(i.orcamentoNovo, i.orcamentoDiario); }).concat([1]));
+    $('bars').innerHTML = ordem.map(function (i, n) {
+      return '<div class="bar-row" data-i="' + n + '"><span class="lbl">' + esc(i.nome) + '</span>' +
+        '<div class="bar-track">' +
+        (i.orcamentoDiario ? '<div class="bar ghost" style="width:' + (i.orcamentoDiario / max * 100) + '%"></div>' : '') +
+        (i.orcamentoNovo ? '<div class="bar" style="width:calc(' + (i.orcamentoNovo / max * 100) + '% - 2px)"></div>' : '') +
+        '</div><span class="v">' + brl(i.orcamentoNovo) + '</span></div>';
+    }).join('');
+    var tip = $('tip');
+    Array.prototype.forEach.call(document.querySelectorAll('.bar-row'), function (el) {
+      var i = ordem[+el.dataset.i];
+      el.addEventListener('mousemove', function (e) {
+        tip.innerHTML = '<b>' + esc(i.nome) + '</b><br>' + ROT[i.decisao.acao] + ' · ' + brl(i.orcamentoDiario) + ' → ' + brl(i.orcamentoNovo) + '<br>' + esc(i.decisao.motivo);
+        tip.style.left = Math.min(e.clientX + 12, window.innerWidth - 270) + 'px'; tip.style.top = (e.clientY + 12) + 'px'; tip.style.opacity = 1;
+      });
+      el.addEventListener('mouseleave', function () { tip.style.opacity = 0; });
+    });
+    $('alertas').innerHTML = '<div class="alerta">Alocado ' + brl(r.distribuicao.alocado) + ' de ' + brl(r.config.orcamentoDiarioTotal) + '/dia' +
+      (r.distribuicao.reserva > 0 ? ' · reserva ' + brl(r.distribuicao.reserva) : '') + '</div>' +
+      r.alertas.map(function (a) { return '<div class="alerta">⚠ ' + esc(a) + '</div>'; }).join('');
+
+    var peso = { critico: 0, atencao: 1, ok: 2 };
+    var todos = [];
+    ordem.forEach(function (i) { i.diagnostico.forEach(function (d) { todos.push({ d: d, nome: i.nome }); }); });
+    todos.sort(function (a, b) { return peso[a.d.nivel] - peso[b.d.nivel]; });
+    var ic = { critico: '✕ Errado', atencao: '! Atenção', ok: '✓ Certo' };
+    $('diag').innerHTML = todos.map(function (x) {
+      return '<li class="' + x.d.nivel + '"><b>' + ic[x.d.nivel] + ' · ' + esc(x.d.area) + '</b> — ' + esc(x.nome) + '<br>' + esc(x.d.texto) + '<div class="acao">→ ' + esc(x.d.acao) + '</div></li>';
+    }).join('') || '<li class="vazio">Sem apontamentos.</li>';
+
+    $('tbl').tBodies[0].innerHTML = ordem.map(function (i) {
+      return '<tr><td class="nome">' + esc(i.nome) + '</td><td><span class="badge b-' + i.decisao.acao + '" title="' + esc(i.decisao.motivo) + '">' + ROT[i.decisao.acao] + '</span></td>' +
+        '<td>' + i.pontuacao + '</td><td>' + brl(i.gasto) + '</td><td>' + i.resultados + '</td><td>' + brl(i.cpa) + '</td><td>' + pct(i.ctr) + '</td><td>' + brl(i.cpc) + '</td><td>' + brl(i.cpm) + '</td>' +
+        '<td>' + (i.frequencia ? i.frequencia.toFixed(1) : '—') + '</td><td>' + (i.roas !== null && i.receita ? i.roas.toFixed(2) + 'x' : '—') + '</td><td>' + brl(i.orcamentoDiario) + '</td><td><b>' + brl(i.orcamentoNovo) + '</b></td></tr>';
+    }).join('');
+  }
+
+  function carregarTexto(txt, nome) {
+    try { linhas = /\.json$/i.test(nome || '') ? JSON.parse(txt) : RegrasTrafego.lerCsv(txt); }
+    catch (e) { alert('Não consegui ler o arquivo: ' + e.message); return; }
+    if (!linhas.length) { alert('Nenhuma linha reconhecida. Confira se o CSV tem as colunas de nome, valor usado, impressões e resultados.'); return; }
+    render();
+  }
+
+  $('arq').addEventListener('change', function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var rd = new FileReader(); rd.onload = function () { carregarTexto(rd.result, f.name); }; rd.readAsText(f, 'utf-8');
+  });
+  $('exemplo').addEventListener('click', function () { carregarTexto(EXEMPLO, 'exemplo.csv'); });
+  ['orc', 'cpa', 'roas', 'min'].forEach(function (id) { $(id).addEventListener('input', function () { guardar(); render(); }); });
+  $('tema').addEventListener('click', function () {
+    var r = document.documentElement, escuro = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = escuro ? 'light' : 'dark';
+  });
+  restaurar();
+  carregarTexto(EXEMPLO, 'exemplo.csv');
+})();
+</script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /trafego-pago/
 
 Sitemap: https://brasilsagenciadigital.com.br/sitemap.xml
