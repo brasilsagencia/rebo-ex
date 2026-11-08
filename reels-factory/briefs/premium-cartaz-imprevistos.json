@@ -1,0 +1,28 @@
+{
+  "id": "premium-cartaz-imprevistos",
+  "template": "cartaz",
+  "destino": "Meta Ads — Reels/Stories 9:16",
+  "props": {
+    "marca": "premium",
+    "gancho": {"segundos": 3, "linha1": "Imprevistos", "linha2": "não avisam.", "slogan": "A PROTEÇÃO QUE SEU VEÍCULO PRECISA!"},
+    "riscos": {
+      "segundos": 3.5,
+      "kicker": "Num piscar de olhos, pode acontecer:",
+      "itens": [
+        {"icone": "batida", "texto": "Batida"},
+        {"icone": "roubo", "texto": "Roubo"},
+        {"icone": "pane", "texto": "Pane na estrada"}
+      ]
+    },
+    "promessa": {"segundos": 3.5, "destaque": "Proteja hoje", "texto": "o patrimônio que você levou anos para conquistar."},
+    "fechamento": {
+      "segundos": 5,
+      "chamada": "A proteção que seu veículo precisa!",
+      "cta": "Faça sua cotação",
+      "contatos": [
+        {"nome": "Altair Ribeiro", "whatsapp": "22 99611-1300"},
+        {"nome": "Mônica Ribeiro", "whatsapp": "21 99850-0066"}
+      ]
+    }
+  }
+}
