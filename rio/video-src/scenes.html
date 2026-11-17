@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cenas do Rio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #000; }
+  #stage { position: relative; width: 1280px; height: 720px; overflow: hidden; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cap {
+    position: absolute; right: 44px; top: 40px;
+    font: 800 30px/1 "Bricolage Grotesque", sans-serif; color: #fff;
+    background: rgba(0, 40, 70, .38); padding: 14px 22px 16px; border-radius: 999px;
+    letter-spacing: -.01em; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+// Paleta verão carioca
+const C = {
+  mar: '#0077B6', marEsc: '#014F86', ceu: '#7FD6E8', sol: '#FFB703',
+  acerola: '#FB5607', rosa: '#FF7AA2', folha: '#2A9D8F', mata: '#1B6B5F',
+  areia: '#F6D58E', branco: '#FFFFFF', pedra: '#000000', noite: '#2B1B5A', roxo: '#5B2A86'
+};
+
+const W = 1280, H = 720;
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+function sky(id, stops) {
+  return `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">${
+    stops.map(([o, c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')
+  }</linearGradient></defs><rect width="${W}" height="${H}" fill="url(#${id})"/>`;
+}
+
+// Ondas do calçadão de Copacabana: faixas pretas e brancas em senoide
+function calcadao(y0, h, amp, freq, phase, bands = 6) {
+  let out = `<rect x="-40" y="${y0}" width="${W + 80}" height="${h}" fill="${C.branco}"/>`;
+  const bh = h / bands;
+  for (let b = 0; b < bands; b += 2) {
+    let d = '';
+    const top = y0 + b * bh, bot = top + bh;
+    for (let x = -40; x <= W + 40; x += 10) {
+      const y = top + Math.sin((x / W) * Math.PI * 2 * freq + phase) * amp;
+      d += (x === -40 ? 'M' : 'L') + x + ' ' + y.toFixed(1);
+    }
+    for (let x = W + 40; x >= -40; x -= 10) {
+      const y = bot + Math.sin((x / W) * Math.PI * 2 * freq + phase) * amp;
+      d += 'L' + x + ' ' + y.toFixed(1);
+    }
+    out += `<path d="${d}Z" fill="${C.pedra}"/>`;
+  }
+  return out;
+}
+
+function waves(y, color, amp, freq, phase, h = H) {
+  let d = `M-20 ${h}`;
+  for (let x = -20; x <= W + 20; x += 16) {
+    d += ` L${x} ${(y + Math.sin(x / W * Math.PI * 2 * freq + phase) * amp).toFixed(1)}`;
+  }
+  return `<path d="${d} L${W + 20} ${h} Z" fill="${color}"/>`;
+}
+
+function palm(x, y, s, color = C.mata) {
+  const leaves = [-150, -110, -70, -30, 10, 50].map(a =>
+    `<path transform="rotate(${a} 0 0)" d="M0 0 Q 40 -18 90 6 Q 44 -4 0 0Z" fill="${color}"/>`).join('');
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+    <path d="M-6 0 Q 10 120 -4 260 L 8 260 Q 22 120 6 0Z" fill="${color}"/>
+    <g transform="translate(0 0)">${leaves}</g></g>`;
+}
+
+function buildings(y, color, seed = 1, minH = 40, maxH = 120, w0 = 30, w1 = 70, x0 = -20, x1 = W + 20) {
+  let x = x0, s = seed, out = '';
+  const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  while (x < x1) {
+    const w = lerp(w0, w1, rnd()), h = lerp(minH, maxH, rnd());
+    out += `<rect x="${x.toFixed(1)}" y="${(y - h).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}"/>`;
+    x += w + 2;
+  }
+  return out;
+}
+
+// Pão de Açúcar + Morro da Urca
+const sugarloaf = (fill, dx = 0, sc = 1) => `
+  <g transform="translate(${dx} 0) scale(${sc})" fill="${fill}">
+    <path d="M60 520 C 120 420, 230 380, 330 400 C 400 410, 430 470, 470 520Z"/>
+    <path d="M560 520 C 600 330, 660 170, 760 160 C 850 152, 900 300, 930 520Z"/>
+  </g>`;
+
+const scenes = [
+  {
+    nome: 'Pão de Açúcar',
+    svg: () => `${sky('s1', [[0, '#FF9E6B'], [.45, '#FFC46B'], [1, '#FFE3A3']])}
+      <circle id="sun" cx="980" cy="300" r="86" fill="${C.sol}"/>
+      <g id="mtn">${sugarloaf(C.marEsc)}</g>
+      <line x1="300" y1="402" x2="760" y2="164" stroke="#14213D" stroke-width="2.5"/>
+      <line x1="300" y1="410" x2="760" y2="172" stroke="#14213D" stroke-width="2.5"/>
+      <g id="cab"><rect x="-22" y="0" width="44" height="30" rx="7" fill="${C.acerola}"/><rect x="-14" y="6" width="28" height="12" rx="3" fill="#FFE3A3"/><line x1="0" y1="0" x2="0" y2="-14" stroke="#14213D" stroke-width="3"/></g>
+      <g id="sea">${waves(520, C.mar, 6, 3, 0)}</g>
+      <g id="sea2">${waves(570, '#0096C7', 8, 4, 1)}</g>`,
+    update(el, p) {
+      el.querySelector('#sun').setAttribute('cy', lerp(330, 270, p));
+      const t = ease(p * .9 + .05);
+      const x = lerp(318, 742, t), y = lerp(422, 194, t);
+      el.querySelector('#cab').setAttribute('transform', `translate(${x} ${y})`);
+      el.querySelector('#sea').innerHTML = waves(520, C.mar, 6, 3, p * 6);
+      el.querySelector('#sea2').innerHTML = waves(570, '#0096C7', 8, 4, 1 - p * 8);
+    }
+  },
+  {
+    nome: 'Praia de Copacabana',
+    svg: () => `${sky('s2', [[0, C.ceu], [1, '#D8F3F9']])}
+      <circle cx="210" cy="130" r="60" fill="${C.sol}"/>
+      ${sugarloaf('#4BA3C3', 760, .55)}
+      <g id="sea">${waves(300, C.mar, 5, 5, 0)}</g>
+      <g id="foam">${waves(360, '#BDEBF5', 6, 6, 0)}</g>
+      <rect x="0" y="388" width="${W}" height="140" fill="${C.areia}"/>
+      <g id="umb">${[140, 380, 620, 880, 1110].map((x, i) => `
+        <g transform="translate(${x} ${420 + (i % 2) * 34})"><line x1="0" y1="0" x2="0" y2="64" stroke="#5c4a2a" stroke-width="4"/>
+        <path d="M-58 4 Q 0 -44 58 4Z" fill="${[C.acerola, C.sol, C.folha, C.rosa, C.mar][i]}"/></g>`).join('')}</g>
+      <g id="calc">${calcadao(520, 200, 26, 3.2, 0)}</g>`,
+    update(el, p) {
+      el.querySelector('#sea').innerHTML = waves(300, C.mar, 5, 5, p * 5);
+      el.querySelector('#foam').innerHTML = waves(360, '#BDEBF5', 6, 6, -p * 7);
+      el.querySelector('#calc').setAttribute('transform', `translate(${lerp(0, -60, p)} 0)`);
+    }
+  },
+  {
+    nome: 'Bondinho da Urca',
+    svg: () => `${sky('s3', [[0, '#48CAE4'], [1, '#CAF0F8']])}
+      <g id="far">${sugarloaf(C.folha, -200, 1.6)}</g>
+      <rect x="0" y="560" width="${W}" height="160" fill="${C.mar}"/>
+      <line x1="-20" y1="150" x2="1300" y2="330" stroke="#14213D" stroke-width="4"/>
+      <line x1="-20" y1="170" x2="1300" y2="350" stroke="#14213D" stroke-width="4"/>
+      <g id="car">
+        <rect x="-8" y="-60" width="16" height="70" fill="#14213D"/>
+        <circle cx="-14" cy="-60" r="10" fill="#14213D"/><circle cx="14" cy="-60" r="10" fill="#14213D"/>
+        <rect x="-120" y="10" width="240" height="150" rx="34" fill="${C.acerola}"/>
+        <rect x="-100" y="34" width="200" height="74" rx="18" fill="#BDEBF5"/>
+        <line x1="-34" y1="34" x2="-34" y2="108" stroke="${C.acerola}" stroke-width="8"/>
+        <line x1="34" y1="34" x2="34" y2="108" stroke="${C.acerola}" stroke-width="8"/>
+        <rect x="-120" y="128" width="240" height="10" fill="${C.sol}"/>
+      </g>`,
+    update(el, p) {
+      const x = lerp(260, 1020, ease(p));
+      const y = 150 + (x + 20) * (180 / 1320) + 30;
+      el.querySelector('#car').setAttribute('transform', `translate(${x} ${y}) rotate(7.8)`);
+      el.querySelector('#far').setAttribute('transform', `translate(${lerp(0, -40, p)} 0)`);
+    }
+  },
+  {
+    nome: 'Arcos da Lapa',
+    svg: () => {
+      let arches = '';
+      for (let i = 0; i < 9; i++) {
+        const x = 40 + i * 140;
+        arches += `<rect x="${x}" y="300" width="120" height="420" fill="${C.branco}"/>
+          <path d="M${x + 22} 720 L${x + 22} 520 A 38 38 0 0 1 ${x + 98} 520 L${x + 98} 720Z" fill="${C.noite}"/>
+          <path d="M${x + 30} 470 L${x + 30} 380 A 30 30 0 0 1 ${x + 90} 380 L${x + 90} 470Z" fill="${C.noite}"/>`;
+      }
+      const tiles = [C.acerola, C.sol, C.folha, C.mar, '#E63946'];
+      let steps = '';
+      for (let i = 0; i < 32; i++) steps += `<rect x="${i * 40}" y="672" width="38" height="48" fill="${tiles[i % 5]}"/>`;
+      let stars = '';
+      for (let i = 0; i < 40; i++) stars += `<circle class="st" cx="${(i * 197) % W}" cy="${(i * 83) % 260 + 10}" r="${1 + (i % 3)}" fill="#FFE3A3"/>`;
+      return `${sky('s4', [[0, C.noite], [1, C.roxo]])}${stars}
+        <circle cx="1080" cy="120" r="44" fill="#FFE3A3"/>
+        <rect x="0" y="282" width="${W}" height="22" fill="${C.branco}"/>
+        <g id="tram"><rect x="0" y="236" width="170" height="46" rx="8" fill="${C.sol}"/>
+          <rect x="12" y="246" width="146" height="16" rx="3" fill="${C.noite}"/>
+          <line x1="40" y1="236" x2="70" y2="200" stroke="${C.sol}" stroke-width="4"/></g>
+        ${arches}${steps}`;
+    },
+    update(el, p) {
+      el.querySelector('#tram').setAttribute('transform', `translate(${lerp(-200, 1300, p)} 0)`);
+      el.querySelectorAll('.st').forEach((s, i) => s.setAttribute('opacity', .4 + .6 * Math.abs(Math.sin(p * 9 + i))));
+    }
+  },
+  {
+    nome: 'Lagoa Rodrigo de Freitas',
+    svg: () => `${sky('s5', [[0, '#FFB4A2'], [.6, '#FFD6A5'], [1, '#FDFFB6']])}
+      <circle id="sun" cx="640" cy="330" r="70" fill="${C.sol}"/>
+      <path d="M0 420 L120 300 L210 340 L330 180 L400 250 L470 230 L560 330 L720 380 L860 300 L980 340 L1100 260 L1280 360 L1280 420Z" fill="${C.mata}"/>
+      ${buildings(420, '#2D6A8A', 7, 20, 60, 24, 50)}
+      <rect x="0" y="420" width="${W}" height="300" fill="#4CC9F0"/>
+      <g opacity=".35" transform="translate(0 840) scale(1 -1)">
+        <path d="M0 420 L120 300 L210 340 L330 180 L400 250 L470 230 L560 330 L720 380 L860 300 L980 340 L1100 260 L1280 360 L1280 420Z" fill="${C.mata}"/></g>
+      <g id="ripples"></g>
+      <g id="boat"><path d="M-40 0 Q 0 26 40 0Z" fill="${C.branco}"/><path d="M10 -2 Q 20 -40 8 -54 Q 30 -50 26 -30 Q 22 -14 30 -2Z" fill="${C.branco}"/></g>
+      ${palm(90, 470, 1)}${palm(1180, 480, .9)}
+      <rect x="0" y="690" width="${W}" height="30" fill="${C.folha}"/>`,
+    update(el, p) {
+      el.querySelector('#sun').setAttribute('cy', lerp(300, 360, p));
+      el.querySelector('#boat').setAttribute('transform', `translate(${lerp(380, 860, p)} ${560 + Math.sin(p * 12) * 4})`);
+      let r = '';
+      for (let i = 0; i < 9; i++) {
+        const x = (i * 151 + p * 200) % W, y = 470 + (i * 37) % 200;
+        r += `<rect x="${x}" y="${y}" width="${60 + (i % 3) * 30}" height="4" rx="2" fill="#fff" opacity=".55"/>`;
+      }
+      el.querySelector('#ripples').innerHTML = r;
+    }
+  },
+  {
+    nome: 'Sambódromo',
+    svg: () => {
+      let stands = '';
+      for (let r = 0; r < 7; r++) {
+        stands += `<path d="M0 ${300 + r * 50} L520 ${520 + r * 30} L520 ${552 + r * 30} L0 ${332 + r * 50}Z" fill="${r % 2 ? C.acerola : C.sol}"/>`;
+        stands += `<path d="M1280 ${300 + r * 50} L760 ${520 + r * 30} L760 ${552 + r * 30} L1280 ${332 + r * 50}Z" fill="${r % 2 ? C.rosa : C.folha}"/>`;
+      }
+      return `${sky('s6', [[0, '#3A0CA3'], [1, '#7209B7']])}
+        <path d="M430 520 C 470 240, 560 150, 640 150 C 720 150, 810 240, 850 520 L 800 520 C 770 290, 700 210, 640 210 C 580 210, 510 290, 480 520Z" fill="${C.branco}"/>
+        ${stands}
+        <path d="M520 520 L760 520 L1000 720 L280 720Z" fill="#F1E3C8"/>
+        <g id="conf"></g>`;
+    },
+    update(el, p) {
+      const cols = [C.sol, C.acerola, C.ceu, C.rosa, C.folha, '#fff'];
+      let c = '';
+      for (let i = 0; i < 90; i++) {
+        const x = (i * 97) % W + Math.sin(p * 6 + i) * 20;
+        const y = ((i * 53) % H + p * 520 * (1 + (i % 4) * .25)) % (H + 40) - 20;
+        c += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="10" height="6" fill="${cols[i % 6]}" transform="rotate(${(i * 40 + p * 720) % 360} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;
+      }
+      el.querySelector('#conf').innerHTML = c;
+    }
+  },
+  {
+    nome: 'Jockey Club Brasileiro',
+    svg: () => `${sky('s7', [[0, '#90E0EF'], [1, '#E0FBFC']])}
+      <path d="M0 380 L200 300 L360 330 L520 150 L600 200 L700 260 L900 300 L1100 250 L1280 320 L1280 400 L0 400Z" fill="${C.mata}"/>
+      <g fill="#14213D"><rect x="514" y="112" width="12" height="40"/><rect x="494" y="122" width="52" height="8"/></g>
+      ${palm(120, 300, .7)}${palm(1160, 300, .7)}
+      <rect x="0" y="400" width="${W}" height="320" fill="#52B788"/>
+      <rect x="0" y="470" width="${W}" height="120" fill="#D4A373"/>
+      <g id="rail">${Array.from({length: 40}, (_, i) => `<rect x="${i * 40}" y="452" width="6" height="26" fill="#fff"/>`).join('')}
+        <rect x="0" y="452" width="${W}" height="6" fill="#fff"/></g>
+      <g id="horse" fill="#3D2B1F">
+        <ellipse cx="0" cy="0" rx="70" ry="28"/>
+        <path d="M50 -14 L95 -66 L118 -60 L110 -46 L80 -6Z"/>
+        <path d="M100 -64 L130 -52 L124 -40 L104 -48Z"/>
+        <path id="tail" d="M-66 -10 Q -110 -20 -120 20 Q -96 0 -66 6Z"/>
+        <g id="legs"></g>
+        <g transform="translate(0 -26)"><path d="M-10 0 L10 -40 L26 -36 L14 0Z" fill="${C.acerola}"/><circle cx="20" cy="-48" r="11" fill="${C.sol}"/></g>
+      </g>`,
+    update(el, p) {
+      const x = lerp(-180, 1440, p);
+      el.querySelector('#horse').setAttribute('transform', `translate(${x} ${520 + Math.sin(p * 40) * 4})`);
+      const a = Math.sin(p * 40) * 32;
+      el.querySelector('#legs').innerHTML = [[-44, a], [-30, -a], [36, -a], [50, a]].map(([lx, r]) =>
+        `<rect x="${lx - 5}" y="10" width="10" height="70" rx="4" transform="rotate(${r} ${lx} 14)"/>`).join('');
+    }
+  },
+  {
+    nome: 'Estádio do Maracanã',
+    svg: () => `${sky('s8', [[0, '#023E8A'], [1, '#0077B6']])}
+      ${[160, 1120].map(x => `<rect x="${x - 4}" y="90" width="8" height="250" fill="#ADB5BD"/>
+        <rect x="${x - 36}" y="70" width="72" height="34" rx="4" fill="#FFFDE7" class="flood"/>`).join('')}
+      <ellipse cx="640" cy="470" rx="560" ry="210" fill="#E9ECEF"/>
+      <ellipse cx="640" cy="470" rx="520" ry="186" fill="${C.branco}"/>
+      <ellipse cx="640" cy="482" rx="440" ry="150" fill="${C.sol}"/>
+      <ellipse cx="640" cy="488" rx="380" ry="122" fill="${C.mar}"/>
+      <ellipse cx="640" cy="494" rx="320" ry="96" fill="#2DC653"/>
+      <g stroke="#fff" stroke-width="3" fill="none">
+        <ellipse cx="640" cy="494" rx="270" ry="72"/><line x1="640" y1="422" x2="640" y2="566"/>
+        <ellipse cx="640" cy="494" rx="40" ry="14"/></g>
+      <g id="ball"><circle r="12" fill="#fff"/><circle r="5" fill="#14213D"/></g>`,
+    update(el, p) {
+      const x = lerp(470, 820, p), y = 494 - Math.abs(Math.sin(p * Math.PI * 2)) * 90;
+      el.querySelector('#ball').setAttribute('transform', `translate(${x} ${y})`);
+      el.querySelectorAll('.flood').forEach(f => f.setAttribute('opacity', .75 + .25 * Math.sin(p * 30)));
+    }
+  },
+  {
+    nome: 'Aterro do Flamengo',
+    svg: () => `${sky('s9', [[0, '#8EECF5'], [1, '#E0FBFC']])}
+      ${sugarloaf('#4BA3C3', 620, .6)}
+      <rect x="0" y="310" width="${W}" height="40" fill="${C.mar}"/>
+      <rect x="0" y="350" width="${W}" height="370" fill="#74C69D"/>
+      <path d="M-20 720 C 300 520, 700 470, 1300 430 L1300 470 C 760 500, 360 560, 60 720Z" fill="#F1E3C8"/>
+      ${palm(160, 350, .9)}${palm(420, 360, .7)}${palm(1040, 350, .8)}${palm(1210, 370, .6)}
+      <g id="kites"></g>`,
+    update(el, p) {
+      const k = [[300, 140, C.acerola], [720, 100, C.sol], [980, 180, C.rosa]];
+      el.querySelector('#kites').innerHTML = k.map(([x, y, c], i) => {
+        const kx = x + Math.sin(p * 5 + i) * 40 + p * 60, ky = y + Math.cos(p * 4 + i) * 20;
+        return `<line x1="${kx}" y1="${ky + 30}" x2="${x - 80}" y2="640" stroke="#14213D" stroke-width="1.5"/>
+          <path d="M${kx} ${ky - 34} L${kx + 24} ${ky} L${kx} ${ky + 30} L${kx - 24} ${ky}Z" fill="${c}"/>
+          <path d="M${kx} ${ky + 30} q 10 18 -6 34 q 14 10 0 26" stroke="${c}" stroke-width="3" fill="none"/>`;
+      }).join('');
+    }
+  },
+  {
+    nome: 'Barra da Tijuca',
+    svg: () => `${sky('s10', [[0, '#FF8FAB'], [.5, '#FFB703'], [1, '#FFE8A3']])}
+      <circle id="sun" cx="700" cy="330" r="96" fill="#FFF3B0"/>
+      ${buildings(360, '#B5487A', 3, 60, 150, 40, 70, 560, 1300)}
+      <path d="M-40 380 C 0 200, 80 120, 180 110 C 300 100, 360 210, 420 380Z" fill="#7A2E57"/>
+      <g id="sea">${waves(370, C.mar, 6, 4, 0)}</g>
+      <rect x="0" y="560" width="${W}" height="160" fill="${C.areia}"/>
+      <g id="kite"><path d="M0 0 L60 -110 L84 -96 L30 0Z" fill="${C.acerola}"/><rect x="-6" y="0" width="70" height="10" rx="5" fill="#fff"/></g>
+      ${palm(1100, 560, .8, '#5C1A3E')}`,
+    update(el, p) {
+      el.querySelector('#sun').setAttribute('cy', lerp(310, 380, p));
+      el.querySelector('#sea').innerHTML = waves(370, C.mar, 6, 4, p * 6);
+      el.querySelector('#kite').setAttribute('transform', `translate(${lerp(200, 900, p)} ${470 + Math.sin(p * 10) * 6})`);
+    }
+  }
+];
+
+// Monta o palco
+const stage = document.getElementById('stage');
+const els = scenes.map(s => {
+  const d = document.createElement('div');
+  d.className = 'scene';
+  d.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg"><g class="kb">${s.svg()}</g></svg><div class="cap">${s.nome}</div>`;
+  stage.appendChild(d);
+  return d;
+});
+
+// Linha do tempo: cada cena 3.4s, transição de 0.6s
+const SCENE = 3.4, FADE = 0.6;
+window.DURATION = scenes.length * SCENE;
+window.SCENE = SCENE;
+window.render = function (t, opts = {}) {
+  els.forEach((el, i) => {
+    const start = i * SCENE;
+    let local = t - start;
+    // a última cena volta para a primeira: o vídeo faz loop sem corte
+    if (i === 0 && t > DURATION - FADE) local = t - DURATION;
+    const p = Math.min(1, Math.max(0, (local + FADE) / (SCENE + FADE)));
+    let op = 0;
+    if (local >= -FADE && local < SCENE) op = local < 0 ? (local + FADE) / FADE : 1;
+    if (i === 0 && t < FADE && !opts.noLoop) op = 1;
+    el.style.opacity = op;
+    el.style.zIndex = op > 0 && local < 0 ? 2 : 1;
+    el.querySelector('.cap').style.display = opts.noCaption ? 'none' : '';
+    if (op > 0) {
+      scenes[i].update(el, p);
+      const s = lerp(1, 1.06, p);
+      el.querySelector('.kb').setAttribute('transform', `translate(${W / 2} ${H / 2}) scale(${s}) translate(${-W / 2} ${-H / 2})`);
+    }
+  });
+};
+window.showScene = function (i) {
+  els.forEach((el, j) => (el.style.opacity = j === i ? 1 : 0));
+  scenes[i].update(els[i], .5);
+  els[i].querySelector('.cap').style.display = 'none';
+};
+window.render(0);
+</script>
+</body>
+</html>

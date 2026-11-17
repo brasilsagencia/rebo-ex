@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rio de Verão | Roteiros pelos pontos turísticos do Rio de Janeiro</title>
+  <meta name="description" content="Pão de Açúcar, Copacabana, Lapa, Maracanã e mais: os dez pontos turísticos do Rio para visitar no verão, com dicas de horário, transporte e segurança.">
+  <meta name="theme-color" content="#0077B6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="rio.css">
+  <script defer src="rio.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true">
+    <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol>
+    <symbol id="i-chuva" viewBox="0 0 24 24"><path d="M7 15a4.5 4.5 0 1 1 1.2-8.8A5.5 5.5 0 0 1 19 8.5a3.5 3.5 0 0 1-.5 6.5"/><path d="M9 18l-1 3M13 18l-1 3M17 18l-1 3"/></symbol>
+    <symbol id="i-metro" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l1.5-4M15 21l-1.5-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></symbol>
+    <symbol id="i-agua" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></symbol>
+    <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.5-3 8-7 9.5-4-1.5-7-5-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v1h18v-1a2 2 0 0 1 0-4 2 2 0 0 0 0-4V7H3z"/><path d="M14 7v10" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-fone" viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-dica" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-fechar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-whats" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8.5 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></symbol>
+  </svg>
+
+  <header class="topo">
+    <a class="marca" href="#inicio" aria-label="Rio de Verão, voltar ao início">
+      <svg viewBox="0 0 40 24" aria-hidden="true"><path d="M2 22 C 6 14, 10 12, 14 13 C 17 14, 18 18, 19 22Z"/><path d="M20 22 C 22 10, 25 3, 30 3 C 34 3, 36 10, 38 22Z"/></svg>
+      Rio de Verão
+    </a>
+    <nav aria-label="Seções">
+      <a href="#antes-de-ir">Antes de ir</a>
+      <a href="#galeria">Pontos turísticos</a>
+      <a href="#quem-somos">Quem somos</a>
+    </nav>
+    <a class="botao botao-sol" href="#contato">Montar roteiro</a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="media/rio-verao-poster.jpg" aria-label="Animação com os dez pontos turísticos do Rio: Pão de Açúcar, Copacabana, Bondinho da Urca, Arcos da Lapa, Lagoa, Sambódromo, Jockey Club, Maracanã, Aterro do Flamengo e Barra da Tijuca">
+        <source src="media/rio-verao.mp4" type="video/mp4">
+      </video>
+      <div class="hero-texto">
+        <h1>Dez paradas para viver o verão no Rio</h1>
+        <p>Do bondinho ao pôr do sol na Barra: os lugares que todo mundo quer ver, com o horário certo, o caminho mais fácil e o que levar.</p>
+        <div class="hero-acoes">
+          <a class="botao botao-sol" href="#galeria">Ver os dez lugares</a>
+          <a class="botao botao-vidro" href="#antes-de-ir">Dicas antes de sair</a>
+        </div>
+      </div>
+      <p class="video-legenda" aria-hidden="true"><svg class="ic"><use href="#i-pin"/></svg><span>Pão de Açúcar</span></p>
+      <button class="video-controle" type="button" aria-pressed="false" aria-label="Pausar vídeo">
+        <svg class="ic"><use href="#i-pause"/></svg>
+      </button>
+    </section>
+
+    <div class="calcadao" aria-hidden="true"></div>
+
+    <section class="antes" id="antes-de-ir" aria-labelledby="antes-titulo">
+      <div class="largura">
+        <h2 id="antes-titulo">Antes de ir</h2>
+        <p class="intro">O verão carioca vai de dezembro a março. Faz calor de verdade, chove rápido no fim da tarde e a cidade inteira vai para a rua.</p>
+        <ul class="infos">
+          <li>
+            <svg class="ic"><use href="#i-sol"/></svg>
+            <h3>30 a 38 °C</h3>
+            <p>Use protetor FPS 50 e procure sombra entre 11h e 15h, quando o sol é mais forte.</p>
+          </li>
+          <li>
+            <svg class="ic"><use href="#i-chuva"/></svg>
+            <h3>Chuva de fim de tarde</h3>
+            <p>Pancadas fortes e curtas. Deixe os mirantes para a manhã, quando o céu costuma estar limpo.</p>
+          </li>
+          <li>
+            <svg class="ic"><use href="#i-metro"/></svg>
+            <h3>Metrô até a praia</h3>
+            <p>As linhas 1 e 4 ligam Centro, Copacabana, Ipanema e Barra. É o jeito mais rápido de fugir do trânsito.</p>
+          </li>
+          <li>
+            <svg class="ic"><use href="#i-agua"/></svg>
+            <h3>Beba água o dia todo</h3>
+            <p>Na areia tem mate gelado, água de coco e biscoito de polvilho. Leve uma garrafa para os passeios.</p>
+          </li>
+          <li>
+            <svg class="ic"><use href="#i-escudo"/></svg>
+            <h3>Só o necessário</h3>
+            <p>Na praia e em lugares cheios, leve pouco dinheiro e guarde o celular quando não estiver usando.</p>
+          </li>
+          <li>
+            <svg class="ic"><use href="#i-ticket"/></svg>
+            <h3>Ingresso antecipado</h3>
+            <p>Bondinho e tour do Maracanã vendem online. Comprar antes evita as filas da alta temporada.</p>
+          </li>
+        </ul>
+        <div class="emergencia">
+          <svg class="ic"><use href="#i-fone"/></svg>
+          <p>Emergência: <strong>190</strong> Polícia Militar, <strong>192</strong> SAMU, <strong>193</strong> Bombeiros e salva-vidas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="galeria" id="galeria" aria-labelledby="galeria-titulo">
+      <div class="largura">
+        <h2 id="galeria-titulo">Os pontos turísticos</h2>
+        <p class="intro">Toque em um lugar para ver quando ir, como chegar e uma dica de quem mora aqui.</p>
+        <ul class="mosaico">
+          <li class="m-grande"><button type="button" data-lugar="0"><img src="media/pao-de-acucar.jpg" alt="" loading="lazy" width="1280" height="720"><span>Pão de Açúcar</span></button></li>
+          <li><button type="button" data-lugar="1"><img src="media/copacabana.jpg" alt="" loading="lazy" width="1280" height="720"><span>Praia de Copacabana</span></button></li>
+          <li><button type="button" data-lugar="2"><img src="media/bondinho.jpg" alt="" loading="lazy" width="1280" height="720"><span>Bondinho da Urca</span></button></li>
+          <li class="m-alto"><button type="button" data-lugar="3"><img src="media/lapa.jpg" alt="" loading="lazy" width="1280" height="720"><span>Lapa</span></button></li>
+          <li><button type="button" data-lugar="4"><img src="media/lagoa.jpg" alt="" loading="lazy" width="1280" height="720"><span>Lagoa Rodrigo de Freitas</span></button></li>
+          <li class="m-largo"><button type="button" data-lugar="5"><img src="media/sambodromo.jpg" alt="" loading="lazy" width="1280" height="720"><span>Sambódromo</span></button></li>
+          <li><button type="button" data-lugar="6"><img src="media/jockey.jpg" alt="" loading="lazy" width="1280" height="720"><span>Jockey Club Brasileiro</span></button></li>
+          <li class="m-grande"><button type="button" data-lugar="7"><img src="media/maracana.jpg" alt="" loading="lazy" width="1280" height="720"><span>Estádio do Maracanã</span></button></li>
+          <li><button type="button" data-lugar="8"><img src="media/aterro.jpg" alt="" loading="lazy" width="1280" height="720"><span>Aterro do Flamengo</span></button></li>
+          <li><button type="button" data-lugar="9"><img src="media/barra.jpg" alt="" loading="lazy" width="1280" height="720"><span>Barra da Tijuca</span></button></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quem" id="quem-somos" aria-labelledby="quem-titulo">
+      <div class="largura quem-grade">
+        <div>
+          <h2 id="quem-titulo">Quem somos</h2>
+          <p>Somos um grupo de guias nascidos no Rio. Começamos levando amigos de fora para conhecer a cidade e hoje montamos roteiros para quem quer ver os cartões-postais sem perder tempo em fila nem pegar trânsito à toa.</p>
+          <p>Cada passeio é pensado pelo horário: mirante de manhã, praia no meio do dia, pôr do sol no lugar certo e samba à noite na Lapa. Atendemos em português, inglês e espanhol.</p>
+        </div>
+        <ul class="quem-lista">
+          <li><strong>A pé, de bike ou de van</strong> Roteiros de meio dia ou dia inteiro.</li>
+          <li><strong>Grupos pequenos</strong> No máximo 12 pessoas por guia.</li>
+          <li><strong>Saída do seu hotel</strong> Na Zona Sul, Centro e Barra.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contato" id="contato" aria-labelledby="contato-titulo">
+      <div class="largura">
+        <h2 id="contato-titulo">Monte seu roteiro</h2>
+        <p>Diga quantos dias você tem e o que quer ver. A gente responde com um roteiro pelo WhatsApp.</p>
+        <a class="botao botao-sol" href="https://wa.me/5521990029982?text=Ol%C3%A1!%20Quero%20montar%20um%20roteiro%20pelo%20Rio." target="_blank" rel="noopener">
+          <svg class="ic"><use href="#i-whats"/></svg> Falar no WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="largura">
+      <p>Ilustrações e vídeo criados para esta página.</p>
+      <p>Modelo de site feito pela <a href="../index.html">Brasils Agência Digital</a>.</p>
+    </div>
+  </footer>
+
+  <dialog class="lugar" aria-labelledby="lugar-nome">
+    <img src="" alt="" width="1280" height="720">
+    <div class="lugar-corpo">
+      <h3 id="lugar-nome"></h3>
+      <p class="lugar-resumo"></p>
+      <dl>
+        <div><dt><svg class="ic"><use href="#i-pin"/></svg> Como chegar</dt><dd data-campo="chegar"></dd></div>
+        <div><dt><svg class="ic"><use href="#i-relogio"/></svg> Melhor horário</dt><dd data-campo="quando"></dd></div>
+        <div><dt><svg class="ic"><use href="#i-dica"/></svg> Dica local</dt><dd data-campo="dica"></dd></div>
+      </dl>
+    </div>
+    <form method="dialog"><button class="fechar" aria-label="Fechar"><svg class="ic"><use href="#i-fechar"/></svg></button></form>
+  </dialog>
+</body>
+</html>
