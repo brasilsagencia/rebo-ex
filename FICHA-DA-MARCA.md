@@ -16,7 +16,7 @@ Peça-modelo da série: (pendente — gerar após receber o logo)
 Rótulo (texto exato): n/a
 Estilo de foto: negócios locais reais, celular na mão, Google Maps/WhatsApp em tela, luz natural (palpite)
 Referências que admira: (palpite — preencher)
-Canais: Instagram @brasils.agencia | site brasils.com.br (confirmar: brasilsagenciadigital.com.br não respondeu) | WhatsApp
+Canais: Instagram @brasils.agencia | site brasilsagenciadigital.com.br (oficial; a apresentação comercial ainda cita brasils.com.br — corrigir) | WhatsApp
 Palavras proibidas: "garantido", "1º lugar garantido", "pacote genérico" para descrever a própria oferta (palpite)
 Promessas proibidas: posicionamento garantido no Google, vendas garantidas, hospedagem grátis, nº de contas de e-mail; números (3x, 95%, 200+) só com comprovação
 Emoji: usa pouco (✅ 📲 ⏰ em anúncios)
