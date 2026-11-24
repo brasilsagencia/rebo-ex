@@ -10,13 +10,14 @@ Trata o cliente por: você
 Cores: azul-marinho #0A1A2E (principal/fundo), branco #FFFFFF (apoio/texto), laranja #F97415 (destaque, só para chamadas) (oficial — manual 01/11/2026)
 Fundo preferido nas peças: sólido azul-marinho #0A1A2E ou branco, alternados; sem gradiente (oficial)
 Letra: Montserrat Bold 700/Black 900 em títulos; Poppins Regular 400/SemiBold 600 no corpo (oficial) — nos prompts de imagem: "bold geometric sans-serif"
-Logo: reenviar o arquivo quando precisar | nome "Brasils Agência Digital" em branco: só sobre fundo escuro, margem livre ≥ ¼ da altura do símbolo, sem esticar/girar/efeitos
+Logo: https://cdn.kairogen.ai/generation/inputs/images/3636cbe4cf4bba35456913942c76421360e602e8ba4121a2be67c1936b8d0c07.png (recorte em baixa resolução; trocar pelo arquivo original quando houver) | versão em quadro branco funciona sobre o azul-marinho | nome "Brasils Agência Digital" em branco: só sobre fundo escuro, margem livre ≥ ¼ da altura do símbolo, sem esticar/girar/efeitos
 Fotos do produto (âncoras): n/a (serviço) — usar prints de resultado, celular com Google Maps, empresário local real
-Peça-modelo da série: (pendente — gerar após receber o logo)
+Peça-modelo da série: https://cdn.kairogen.ai/gallery/images/6a10c86aae170a8d5026d4ee/2047daf8-046e-479a-aa16-2fcd77757be6.png
+Oferta ativa: Site institucional + Perfil da Empresa no Google por R$ 997 (botão WhatsApp, formulário, 1 ano de domínio e e-mail grátis); sem prazo/vagas definidos
 Rótulo (texto exato): n/a
 Estilo de foto: negócios locais reais, celular na mão, Google Maps/WhatsApp em tela, luz natural (palpite)
 Referências que admira: (palpite — preencher)
-Canais: Instagram @brasils.agencia | site brasilsagenciadigital.com.br (oficial; a apresentação comercial ainda cita brasils.com.br — corrigir) | WhatsApp
+Canais: WhatsApp (21) 99002-9982 | Instagram @brasils.agencia | site brasilsagenciadigital.com.br (oficial; a apresentação comercial ainda cita brasils.com.br — corrigir) | WhatsApp
 Palavras proibidas: "garantido", "1º lugar garantido", "pacote genérico" para descrever a própria oferta (palpite)
 Promessas proibidas: posicionamento garantido no Google, vendas garantidas, hospedagem grátis, nº de contas de e-mail; números (3x, 95%, 200+) só com comprovação
 Emoji: usa pouco (✅ 📲 ⏰ em anúncios)
