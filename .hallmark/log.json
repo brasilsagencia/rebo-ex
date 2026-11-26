@@ -1,0 +1,32 @@
+[
+ {
+  "shape": "Index-First",
+  "theme": "specimen",
+  "axes": "light/high-contrast-serif/cool",
+  "hero": "Banner",
+  "nav": "search-led bar",
+  "footer": "statement",
+  "imagery": "photographs, library 1, duotone",
+  "photos": [
+   "Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg"
+  ],
+  "entry": "none",
+  "fingerprint": "index-first/banner/search-led/statement/specimen/book",
+  "sections": [
+   "Hero",
+   "Index",
+   "Switcher",
+   "Showcase",
+   "Table",
+   "Form",
+   "Footer"
+  ],
+  "signature": "index of situations searchable from the nav, each row booking its consultation",
+  "waived": [
+   "81"
+  ],
+  "prompt": "página de advocacia, pessoa física, Rio, agendar consulta",
+  "date": "2026-11-26",
+  "mode": "build"
+ }
+]

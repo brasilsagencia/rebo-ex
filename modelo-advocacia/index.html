@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valença Teixeira Advocacia | Família, trabalho, INSS e consumidor no Rio</title>
+<meta name="description" content="Advocacia para pessoas no Rio de Janeiro: encontre a sua situação, veja o que levar e marque a primeira consulta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="advocacia.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="nav">
+  <div class="container nav__row">
+    <a class="wordmark" href="#main" aria-label="Valença Teixeira Advocacia, início">Valença Teixeira</a>
+    <form class="search" role="search" action="#assuntos" data-search>
+      <label class="visually-hidden" for="q">Procurar um assunto</label>
+      <input id="q" name="q" type="search" placeholder="Procurar um assunto" autocomplete="off" enterkeyhint="search">
+      <kbd class="search__key" aria-hidden="true">/</kbd>
+    </form>
+    <a class="btn btn--quiet nav__action" href="#agendar">Agendar<span class="nav__more"> consulta</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero__grid">
+      <h1 id="hero-title">Conte o que aconteceu.</h1>
+      <div class="hero__side">
+        <p class="lead">Advocacia para pessoas no Rio: família, trabalho, INSS e consumidor.</p>
+        <a class="btn" href="#agendar">Agendar consulta</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="index" id="assuntos" aria-labelledby="assuntos-title">
+    <div class="container">
+      <div class="index__head">
+        <h2 id="assuntos-title">Em que situação você está?</h2>
+        <fieldset class="seg" data-filter>
+          <legend class="visually-hidden">Filtrar por área</legend>
+          <input type="radio" name="area" id="a-todas" value="" checked><label for="a-todas">Todas</label>
+          <input type="radio" name="area" id="a-familia" value="familia"><label for="a-familia">Família</label>
+          <input type="radio" name="area" id="a-trabalho" value="trabalho"><label for="a-trabalho">Trabalho</label>
+          <input type="radio" name="area" id="a-inss" value="inss"><label for="a-inss">INSS</label>
+          <input type="radio" name="area" id="a-consumidor" value="consumidor"><label for="a-consumidor">Consumidor</label>
+        </fieldset>
+      </div>
+
+      <ol class="cases" data-cases>
+        <li data-area="familia"><span class="cases__area">Família</span><h3>Quero me divorciar</h3><a href="#agendar" data-assunto="Divórcio" aria-label="Agendar consulta sobre divórcio">Agendar</a></li>
+        <li data-area="familia"><span class="cases__area">Família</span><h3>A pensão do meu filho atrasou</h3><a href="#agendar" data-assunto="Pensão alimentícia" aria-label="Agendar consulta sobre pensão atrasada">Agendar</a></li>
+        <li data-area="familia"><span class="cases__area">Família</span><h3>Preciso abrir um inventário</h3><a href="#agendar" data-assunto="Inventário" aria-label="Agendar consulta sobre inventário">Agendar</a></li>
+        <li data-area="trabalho"><span class="cases__area">Trabalho</span><h3>Fui demitido sem receber tudo</h3><a href="#agendar" data-assunto="Verbas rescisórias" aria-label="Agendar consulta sobre demissão">Agendar</a></li>
+        <li data-area="trabalho"><span class="cases__area">Trabalho</span><h3>Faço hora extra e não recebo</h3><a href="#agendar" data-assunto="Horas extras" aria-label="Agendar consulta sobre horas extras">Agendar</a></li>
+        <li data-area="trabalho"><span class="cases__area">Trabalho</span><h3>Sofri um acidente no trabalho</h3><a href="#agendar" data-assunto="Acidente de trabalho" aria-label="Agendar consulta sobre acidente de trabalho">Agendar</a></li>
+        <li data-area="inss"><span class="cases__area">INSS</span><h3>Meu benefício foi negado</h3><a href="#agendar" data-assunto="Benefício negado" aria-label="Agendar consulta sobre benefício negado">Agendar</a></li>
+        <li data-area="inss"><span class="cases__area">INSS</span><h3>Quero saber quando me aposento</h3><a href="#agendar" data-assunto="Aposentadoria" aria-label="Agendar consulta sobre aposentadoria">Agendar</a></li>
+        <li data-area="consumidor"><span class="cases__area">Consumidor</span><h3>Meu nome foi negativado sem motivo</h3><a href="#agendar" data-assunto="Negativação indevida" aria-label="Agendar consulta sobre negativação">Agendar</a></li>
+        <li data-area="consumidor"><span class="cases__area">Consumidor</span><h3>O produto veio com defeito</h3><a href="#agendar" data-assunto="Produto com defeito" aria-label="Agendar consulta sobre produto com defeito">Agendar</a></li>
+      </ol>
+      <p class="cases__empty" data-empty hidden>Nenhum assunto com essa palavra. Conte o caso na <a href="#agendar">primeira consulta</a>.</p>
+    </div>
+  </section>
+
+  <section class="docs" id="documentos" aria-labelledby="docs-title">
+    <div class="container">
+      <h2 id="docs-title">O que levar à primeira consulta</h2>
+      <div class="switch" data-switch>
+        <div class="tabs" role="tablist" aria-label="Área do caso">
+          <button type="button" role="tab" id="t-familia" aria-controls="p-familia" aria-selected="true">Família</button>
+          <button type="button" role="tab" id="t-trabalho" aria-controls="p-trabalho" aria-selected="false" tabindex="-1">Trabalho</button>
+          <button type="button" role="tab" id="t-inss" aria-controls="p-inss" aria-selected="false" tabindex="-1">INSS</button>
+          <button type="button" role="tab" id="t-consumidor" aria-controls="p-consumidor" aria-selected="false" tabindex="-1">Consumidor</button>
+        </div>
+        <div class="cells">
+          <p class="cells__lead">RG, CPF e comprovante de residência, em qualquer caso.</p>
+          <ul class="cells__set" role="tabpanel" id="p-familia" aria-labelledby="t-familia">
+            <li>Certidão de casamento</li><li>Certidão de nascimento dos filhos</li><li>Comprovantes de renda</li><li>Lista de bens e dívidas</li><li>Decisão que fixou a pensão</li><li>Certidão de óbito, no inventário</li>
+          </ul>
+          <ul class="cells__set" role="tabpanel" id="p-trabalho" aria-labelledby="t-trabalho" data-later>
+            <li>Carteira de trabalho</li><li>Contracheques</li><li>Termo de rescisão</li><li>Extrato do FGTS</li><li>Mensagens e escalas de horário</li><li>Atestados e CAT, se houve acidente</li>
+          </ul>
+          <ul class="cells__set" role="tabpanel" id="p-inss" aria-labelledby="t-inss" data-later>
+            <li>Extrato do CNIS</li><li>Carta de indeferimento</li><li>Laudos e exames</li><li>Carteiras de trabalho antigas</li><li>Carnês de contribuição</li><li>Número do benefício</li>
+          </ul>
+          <ul class="cells__set" role="tabpanel" id="p-consumidor" aria-labelledby="t-consumidor" data-later>
+            <li>Nota fiscal ou contrato</li><li>Protocolos de atendimento</li><li>E-mails e conversas</li><li>Comprovante da negativação</li><li>Fotos do defeito</li><li>Faturas cobradas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="plate">
+    <div class="container">
+      <div class="plate__frame" data-slot="sala" data-alt="O escritório: a sala de reunião ou a recepção, em luz natural, sem pessoas posando">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg/1280px-Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg/960px-Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg/1280px-Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg/1920px-Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg 1920w" sizes="(min-width: 90rem) 1312px, 100vw" width="4288" height="2848" alt="Sala de leitura com abóbadas de ferro, mesas longas e luminárias verdes" loading="lazy" decoding="async" style="object-position: 50% 55%">
+      </div>
+      <figcaption>Sala de leitura da Biblioteca Sainte-Geneviève, Paris.</figcaption>
+    </div>
+  </figure>
+
+  <section class="terms" id="prazos" aria-labelledby="prazos-title">
+    <div class="container">
+      <div class="terms__head">
+        <h2 id="prazos-title">Prazos que não esperam</h2>
+        <p class="lead">Passado o prazo, o direito pode não ser mais cobrado.</p>
+      </div>
+      <table class="table">
+        <thead><tr><th scope="col">Assunto</th><th scope="col">Prazo</th><th scope="col">Base legal</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Cobrar direitos trabalhistas</th><td><span class="num">2 anos</span> após sair</td><td>CF, art. 7º, XXIX</td></tr>
+          <tr><th scope="row">Revisar o cálculo do benefício</th><td><span class="num">10 anos</span></td><td>Lei 8.213/91, art. 103</td></tr>
+          <tr><th scope="row">Reclamar de defeito aparente</th><td><span class="num">90 dias</span> da entrega</td><td>CDC, art. 26, II</td></tr>
+          <tr><th scope="row">Pedir indenização por dano</th><td><span class="num">5 anos</span></td><td>CDC, art. 27</td></tr>
+          <tr><th scope="row">Cobrar pensão atrasada</th><td><span class="num">2 anos</span> por parcela</td><td>Código Civil, art. 206, § 2º</td></tr>
+        </tbody>
+      </table>
+      <p class="terms__note">Regra geral. Contra filho menor, a pensão não prescreve. A consulta confirma o seu caso.</p>
+    </div>
+  </section>
+
+  <section class="book" id="agendar" aria-labelledby="agendar-title">
+    <div class="container book__grid">
+      <div class="book__facts">
+        <h2 id="agendar-title">Marque a primeira consulta</h2>
+        <dl class="facts">
+          <div><dt>Endereço</dt><dd><span class="fill" data-fill="endereco">Endereço a confirmar</span></dd></div>
+          <div><dt>Atendimento</dt><dd><span class="fill" data-fill="horario">Horário a confirmar</span></dd></div>
+        </dl>
+      </div>
+      <form class="form" data-whatsapp="" novalidate>
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input id="nome" name="nome" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="assunto">Assunto</label>
+          <select id="assunto" name="assunto">
+            <option>Divórcio</option><option>Pensão alimentícia</option><option>Inventário</option>
+            <option>Verbas rescisórias</option><option>Horas extras</option><option>Acidente de trabalho</option>
+            <option>Benefício negado</option><option>Aposentadoria</option>
+            <option>Negativação indevida</option><option>Produto com defeito</option><option>Outro assunto</option>
+          </select>
+        </div>
+        <fieldset class="seg seg--form">
+          <legend>Melhor período</legend>
+          <input type="radio" name="periodo" id="p-manha" value="manhã" checked><label for="p-manha">Manhã</label>
+          <input type="radio" name="periodo" id="p-tarde" value="tarde"><label for="p-tarde">Tarde</label>
+        </fieldset>
+        <button class="btn" type="submit">Pedir horário pelo WhatsApp</button>
+        <p class="form__help" id="form-help" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer__line">Quanto antes a consulta, mais caminhos ficam abertos.</p>
+    <nav class="footer__links" aria-label="Rodapé">
+      <a href="#assuntos">Assuntos</a>
+      <a href="#documentos">O que levar</a>
+      <a href="#prazos">Prazos</a>
+      <a href="#agendar">Agendar</a>
+    </nav>
+    <div class="footer__legal">
+      <p>Valença Teixeira Advocacia é um modelo de site da <a href="../index.html#portfolio">Brasils Agência Digital</a>.</p>
+      <p data-credits>Fotografia: <a href="https://commons.wikimedia.org/wiki/File:Salle_de_lecture_Bibliotheque_Sainte-Genevieve_n03.jpg">Marie-Lan Nguyen</a> (CC BY 2.0 fr, Wikimedia Commons)</p>
+    </div>
+  </div>
+</footer>
+
+<script>window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });</script>
+<script src="advocacia.js" defer></script>
+</body>
+</html>
